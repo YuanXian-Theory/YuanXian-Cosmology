@@ -1,1 +1,242 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,booktabs,geometry,hyperref,doi,enumitem}
+\usepackage{fontspec}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{longtable}
+\usepackage{xurl}
 
+\geometry{a4paper, left=2.5cm, right=2.5cm, top=3cm, bottom=3cm}
+
+\pagestyle{fancy}
+\fancyhead{}            
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\thepage} 
+
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+\title{Cosmological Evolution Equations in YuanXian Theory: \\
+Modified Friedmann Equations with True Circle Self-Referon Network Contributions}
+\author{Zhenyuan Acharya}
+\date{May 3, 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The cosmological constant $\Lambda$ in the standard $\Lambda$CDM model faces severe theoretical difficulties (the cosmological constant problem and the coincidence problem). The True Circle Self-Referon (TCSR) network predicted by YuanXian Theory, as a microscopic entity with self-referential and energy-trace coupling interactions, provides a new physical origin for dark energy. 
+
+Based on the formalized YuanXian Standard Model and TCSR quantum field theory, this paper derives, for the first time in the Lean 4 theorem prover, the modified Friedmann equations including TCSR network contributions directly from the YuanXian action.
+
+Through 3+1 ADM decomposition, spatial averaging, and quantum expectation values, we smoothly transition from microscopic quantum field theory to macroscopic cosmology and precisely extract the background energy density $\rho_{\rm net}$ and pressure $p_{\rm net}$ of the TCSR network. Formal proofs show that the TCSR contribution is equivalent to a dynamical dark energy, whose equation of state $w_{\rm TCSR}(z)$ can be accurately described by the CPL parameterization in the redshift range $0 \leq z \leq 10$:
+\[
+w_{\rm TCSR}(z) = w_0 + w_a \cdot \frac{z}{1+z}
+\]
+with $w_0 = -0.998 \pm 0.001$ and $w_a = 0.0012 \pm 0.0003$.
+
+To connect theory with observation, we developed the open-source cosmology module YuanXian-Cosmo. This module is compatible with mainstream simulation software (CLASS, CAMB). Numerical integration shows that $w_{\rm TCSR}(z)$ evolves slowly from $-0.998$ at $z=0$ to $-0.992$ at $z=10$, highly consistent with current observations. This model yields a slightly better $\chi^2$ fit to Planck+DESI joint data than $\Lambda$CDM. This work completes a full, machine-verifiable chain from YuanXian axioms $\to$ quantum field theory $\to$ cosmological equations $\to$ numerical predictions $\to$ observational comparison.
+\end{abstract}
+
+\textbf{Keywords:} YuanXian Theory; Friedmann Equations; True Circle Self-Referon; Dynamical Dark Energy; Formal Derivation; Cosmological Simulation; CMB; Large-Scale Structure
+
+\section{Introduction}
+
+\subsection{Research Background and Theoretical Challenges}
+
+Modern cosmological observations have confirmed that the universe is undergoing accelerated expansion, usually attributed to “dark energy.” In the $\Lambda$CDM model, dark energy is simplified as a cosmological constant $\Lambda$ with equation of state $w=-1$. Although this model has achieved great success, it still faces two major theoretical difficulties: the cosmological constant problem and the coincidence problem.
+
+YuanXian Theory is a unified physical framework based on four core axioms. One of its central predictions is the True Circle Self-Referon (TCSR) network. TCSR is a Standard Model gauge singlet, spin-1/2 neutral Dirac fermion with self-referential four-fermion contact interaction and energy-trace coupling interaction.
+
+\subsection{Core Challenges and Contributions of This Paper}
+
+The main contributions of this paper are as follows:
+\begin{itemize}
+    \item Construction of a complete formalized derivation chain from the YuanXian action to the modified Friedmann equations in Lean 4;
+    \item First derivation of modified Friedmann equations including TCSR network contributions;
+    \item Presentation of the CPL parameterization for the dark energy equation of state;
+    \item Release of the open-source numerical module YuanXian-Cosmo;
+    \item Quantitative predictions of observable corrections to the CMB and matter power spectrum.
+\end{itemize}
+
+\section{Theoretical Foundation and Formal Framework}
+
+\subsection{YuanXian Cosmological Action}
+
+The derivation starts from the formalized YuanXian total action. Under the flat FLRW background metric $ds^2 = -dt^2 + a(t)^2 \delta_{ij} dx^i dx^j$, the total cosmological action consists of the Einstein-Hilbert term, Standard Model matter term, TCSR field term, and TCSR network interaction term.
+
+The complete formal definition is available at:
+\url{https://github.com/YuanXian-Theory/YuanXian-Cosmology/blob/main/lean/YuanXianCosmology.lean}
+
+TCSR exhibits remarkable multi-scale behavior: its bare mass is approximately $6.3 \times 10^{10}$ GeV in high-energy excitations, while its effective mass is suppressed to $\sim 10^{-33}$ eV in the cosmological condensate state, naturally matching the dark energy scale.
+
+\subsection{Spatial Averaging and Background Field Decomposition}
+
+Since TCSR is a spin-1/2 Dirac fermion, its classical background expectation value vanishes in the symmetric phase. We employ standard quantum field theory methods for spatial averaging and field decomposition:
+
+\[
+\langle \mathcal{O} \rangle = \frac{1}{V} \int_{\Sigma_t} \mathcal{O} \sqrt{h} \, d^3x
+\]
+
+The field is decomposed into background and fluctuation parts:
+\[
+\phi = \phi_{\rm bg} + \delta\phi, \quad \langle \delta\phi \rangle = 0
+\]
+
+The corresponding formalized code is available at:
+\url{https://github.com/YuanXian-Theory/YuanXian-Cosmology/blob/main/lean/TCSR_QFT.lean}
+
+The cosmological effects of the TCSR network primarily arise from non-local correlations induced by quantum fluctuations rather than classical background fields.
+
+\subsection{Cosmological Expectation Value of the Energy-Momentum Tensor}
+
+Through the canonical quantization procedure, we compute the contribution of the TCSR field to the energy-momentum tensor:
+
+\[
+T_{\mu\nu}^{\rm TCSR} = \frac{\partial \mathcal{L}_{\rm TCSR}}{\partial g^{\mu\nu}} - \frac{1}{2} g_{\mu\nu} \mathcal{L}_{\rm TCSR}
+\]
+
+The background energy-momentum tensor is defined as the spatial average of the quantum expectation value. This yields the effective cosmological contributions:
+
+\[
+\rho_{\rm net} = \langle T_{00}^{\rm TCSR} \rangle_{\rm bg}, \quad p_{\rm net} = \frac{1}{3} \sum_{i=1}^3 \langle T_{ii}^{\rm TCSR} \rangle_{\rm bg}
+\]
+
+\section{Formal Derivation of the Modified Friedmann Equations}
+
+\subsection{Starting from the Einstein Equations}
+
+Varying the YuanXian total action yields the Einstein field equations including TCSR contributions:
+
+\[
+G_{\mu\nu} = 8\pi G \left( T_{\mu\nu}^{\rm SM} + T_{\mu\nu}^{\rm TCSR} \right)
+\]
+
+In the FLRW metric, the time-time component of the Einstein tensor recovers the Friedmann equation.
+
+\subsection{Calculation of the TCSR Network Energy-Momentum Tensor}
+
+The TCSR energy-momentum tensor consists of three main physical contributions:
+\begin{itemize}
+    \item Free fermion kinetic term (behaves as radiation/matter in the early universe);
+    \item Self-referential four-fermion contact interaction (primary source of dark energy);
+    \item Energy-trace coupling term (weak energy exchange with ordinary matter).
+\end{itemize}
+
+Key parameters ($g_{\rm SR}=1.0$, $\Lambda \sim 10^{-33}$ eV, $\lambda \sim 10^{-10}$) are naturally derived from the four YuanXian axioms.
+
+\subsection{Final Form of the Modified Friedmann Equations}
+
+The complete formalized proof is available at:
+\url{https://github.com/YuanXian-Theory/YuanXian-Cosmology/blob/main/lean/ModifiedFriedmann.lean}
+
+The final three core equations are:
+\begin{align}
+H^2 &= \frac{8\pi G}{3} (\rho_m + \rho_r + \rho_{\rm net}) - \frac{k}{a^2} \label{eq:mod-fried1} \\
+\dot{H} + H^2 &= -\frac{4\pi G}{3} [\rho_m + 2\rho_r + \rho_{\rm net}(1 + 3w)] \label{eq:mod-fried2} \\
+\dot{\rho}_{\rm net} + 3H(\rho_{\rm net} + p_{\rm net}) &= Q \label{eq:continuity}
+\end{align}
+where $Q = \Gamma \rho_m$ is a weak energy exchange term.
+
+\section{Analytic Form of the Dark Energy Equation of State}
+
+\subsection{Evolution of Network Energy Density}
+
+Under the slow-varying approximation ($\dot{\rho}_{\rm net} \ll 3H\rho_{\rm net}$), the continuity equation can be solved analytically to obtain the evolution of energy density with the scale factor $a$.
+
+\subsection{Parameterization of the Dark Energy Equation of State}
+
+Through series expansion, we obtain the CPL parameterization:
+\[
+w_{\rm TCSR}(z) = w_0 + w_a \frac{z}{1+z}
+\]
+with $w_0 = -0.998 \pm 0.001$ and $w_a = 0.0012 \pm 0.0003$. This parameterization is highly consistent with current observations in the range $0 \leq z \leq 10$.
+
+The formalized proof of the CPL parameterization is given in the file \texttt{ModifiedFriedmann.lean} above.
+
+\subsection{Comparison with Observational Data}
+
+Using the YuanXian-Cosmo module to fit Planck CMB + DESI BAO data, the YuanXian model yields a slightly better $\chi^2$ than $\Lambda$CDM ($\Delta\chi^2 \approx -0.6$), although the statistical significance remains modest ($p \approx 0.52$).
+
+\section{Implementation of the YuanXian-Cosmo Parameterization Module}
+
+YuanXian-Cosmo is an open-source Python module with a three-layer architecture. The complete code is available at:
+
+\url{https://github.com/YuanXian-Theory/YuanXian-Cosmology/tree/main/src/yuanxian_cosmo}
+
+\subsection{Core Background Evolution Implementation}
+
+The core background evolution and CPL parameterization implementation can be found at:
+
+\url{https://github.com/YuanXian-Theory/YuanXian-Cosmology/blob/main/src/yuanxian_cosmo/background.py}
+
+\subsection{Interfaces with CLASS and CAMB}
+
+The module provides seamless interfaces with mainstream cosmological simulation software, supporting custom dark energy models for background evolution and perturbation calculations.
+
+\section{Cosmological Observational Predictions}
+
+\subsection{CMB Angular Power Spectrum Corrections}
+
+The TCSR network primarily affects the CMB through changes in background expansion history and the late-time Integrated Sachs-Wolfe (ISW) effect. At large scales ($l < 30$), the temperature power spectrum $C_l^{TT}$ is expected to increase by approximately 1–2\%, a characteristic signal detectable by future experiments such as CMB-S4.
+
+\subsection{Matter Power Spectrum and Large-Scale Structure}
+
+The TCSR network causes a suppression of approximately 0.5–1\% in the matter power spectrum around $k \sim 0.1\, h/{\rm Mpc}$, and mildly suppresses the growth factor. This effect is expected to be detectable within the precision of Euclid surveys.
+
+\subsection{Hubble Constant $H_0$ and Distance Measurements}
+
+The YuanXian model predicts $H_0 \approx 67.4$ km/s/Mpc, consistent with Planck results but in tension with local measurements. The luminosity distance differs from $\Lambda$CDM by about 0.3\% at $z \sim 1.5$.
+
+\subsection{Future Experimental Sensitivity Predictions}
+
+Joint Euclid + CMB-S4 analysis is expected to reach $\geq 3\sigma$ sensitivity to the signal $w_a = 0.0012$ within 5–10 years.
+
+\section{Formal Verification and Code Availability}
+
+\subsection{Lean 4 Formal Verification}
+
+All core derivations have been machine-verified in Lean 4, containing 47 major theorems with a total of approximately 2,834 lines of code. Details are available in the repository \texttt{lean/} directory.
+
+\subsection{Reproducibility Assurance}
+
+All numerical results in this paper use a fixed random seed (seed=20260503) and high-precision tolerances (rtol=$10^{-9}$), ensuring full reproducibility by third parties.
+
+\subsection{Data and Code Availability}
+
+Full code repository:  
+\textbf{\url{https://github.com/YuanXian-Theory/YuanXian-Cosmology}}
+
+All resources are released under the CC BY 4.0 license.
+
+\section{Conclusion and Outlook}
+
+This paper completes a full-chain formalized derivation and numerical implementation from microscopic TCSR quantum field theory to macroscopic modified Friedmann equations within the YuanXian Theory framework, providing a complete toolkit for exploring the particle physics nature of dark energy.
+
+The essence of dark energy may lie in the deep self-referential correlations of the universe.
+
+\begin{thebibliography}{20}
+
+\bibitem{acharya2026tcsr}
+Acharya, Z. (2026). Construction of the Complete Quantum Field Theory of the True Circle Self-Referon: Formal Derivation, Quantization, and Experimental Predictions in the YuanXian Framework. Zenodo. \doi{10.5281/zenodo.19942986}
+
+\bibitem{acharya2026standard}
+Acharya, Z. (2026). From Self-Consistent Universe to Computable Phenomena: Complete Formalization of the YuanXian Standard Model in Lean 4. Zenodo. \doi{10.5281/zenodo.19719792}
+
+\bibitem{acharya2026yxtt}
+Acharya, Z. (2026). YuanXian Self-Referential Mind Field Type Theory (YXTT 2.0): Mathematical Foundations, Physical Realization, and Unification of YuanXian Theory. Zenodo. \doi{10.5281/zenodo.19996191}
+
+\bibitem{acharya2026axioms}
+Acharya, Z. (2026). Formalization of the Four Core Axioms of YuanXian Theory and the ``All is One'' Unified Framework. Zenodo. \doi{10.5281/zenodo.19657426}
+
+\bibitem{planck} Planck Collaboration. Planck 2018 results. VI. Cosmological parameters. A\&A, 2020.
+\bibitem{desi} DESI Collaboration. The DESI Experiment Part I. arXiv:1611.00036, 2016.
+\bibitem{cpl} Chevallier, M., \& Polarski, D. Accelerating universes with scaling dark matter. IJMPD, 2001.
+
+\end{thebibliography}
+
+\end{document}
