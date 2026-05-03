@@ -15,3 +15,9 @@ This repository contains the formalization and numerical implementation accompan
 ```bash
 pip install yuanxian-cosmo
 lake exe cache get   # for Lean
+
+## Key Results
+•  Modified Friedmann equations with dynamic dark energy component (ρ_net, p_net)
+•  CPL parameterization: w(z) = -0.998 + 0.0012 z/(1+z)
+•  Open-source cosmology module + Lean proofs
+DOI (Zenodo): [To be filled after upload]
